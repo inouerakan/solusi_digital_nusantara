@@ -27,9 +27,8 @@ Proyek ini dibangun untuk memvalidasi unit kompetensi berikut:
 
 ### Backend (API Server)
 - **RESTful Architecture:** Endpoint terstruktur untuk layanan, portofolio, tim, dan testimoni.
-- **Authentication & Authorization:** Implementasi JSON Web Token (JWT) dan middleware role-based access control (RBAC).
+- **Authentication & Authorization:** Implementasi JSON Web Token (JWT).
 - **Database Seeding:** Skrip otomatis (`seed/createAdmin.js`) untuk inisialisasi data awal dan akun administrator.
-- **Security:** Proteksi terhadap SQL Injection (via prepared statements), Helmet.js untuk HTTP headers, dan CORS configuration.
 
 ### Frontend (Client Application)
 - **Dynamic Rendering:** Pengambilan data real-time dari API backend tanpa reload halaman penuh.
