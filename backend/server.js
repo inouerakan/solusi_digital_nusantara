@@ -17,6 +17,7 @@ const historyRouter = require('./routes/history');
 const serviceRouter = require('./routes/services');
 const contactRouter = require('./routes/contact');
 const usersRouter = require('./routes/users');
+const uploadRouter = require('./routes/upload');
 
 app.use('/api/missions', missionsRouter);
 app.use('/api/vision', visionRouter);
@@ -28,6 +29,7 @@ app.use('/api/history', historyRouter);
 app.use('/api/services', serviceRouter);
 app.use('/api/contact', contactRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/upload', uploadRouter);
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
