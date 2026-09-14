@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
 const verifyToken = require('../middleware/verifyToken');
 const rateLimit = require('express-rate-limit');
+const validate = require('../middleware/validate');
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
@@ -19,30 +20,7 @@ const validateInput = [
     body('password').notEmpty().withMessage('Password is required')
 ];
 
-const validateInputFunc = (req, res, next) => {
-    if (!validationResult(req).isEmpty()) {
-        return res.status(400).json(validationResult(req).array()[0].msg);
-    }
-    next();
-};
-
-router.post('/register', verifyToken, validateInput, validateInputFunc, async (req, res) => {
-    try {
-        const {email, password} = req.body;
-        const [exist] = await db.query('SELECT id FROM users WHERE email = ?', [email]);
-        const isExist = exist.length > 0;
-        if (isExist) {
-            return res.status(400).json({message: 'Email is existed'});
-        }
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const [result] = await db.execute('INSERT INTO users (email, password, updated_at) VALUES (?, ?, NOW())', [email, hashedPassword]);
-        return res.json({message: 'Admin created', affectedRows: result.affectedRows});
-    } catch (err) {
-        return res.status(500).json({message: 'Failed to create'});
-    }
-});
-
-router.post('/login', limiter, validateInput, validateInputFunc, async (req, res) => {
+router.post('/login', limiter, validateInput, validate, async (req, res) => {
     try {
         const {email, password} = req.body;
         const query = 'SELECT * FROM users WHERE email = ?';
@@ -62,7 +40,7 @@ router.post('/login', limiter, validateInput, validateInputFunc, async (req, res
         );
         return res.json({message: 'Login successful', token});
     } catch (err) {
-        return res.status(500).json({error: 'Failed to login'});
+        return res.status(500).json({message: 'Failed to login'});
     }
 });
 

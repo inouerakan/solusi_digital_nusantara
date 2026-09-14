@@ -49,7 +49,7 @@ export default function GalleryForm({data, fetchGallery, isCreateData}) {
             }
 
             if (isCreateData) {
-                await axiosInstance.post('/gallery/', {
+                await axiosInstance.post('/gallery', {
                     title,
                     image_url: finalImageUrl
                 });
@@ -68,6 +68,8 @@ export default function GalleryForm({data, fetchGallery, isCreateData}) {
 
     const handleDelete = async () => {
         setError('');
+        if (!confirm('Yakin ingin menghapus data ini?')) return;
+        setIsUploading(true);
         try {
             await axiosInstance.delete(`/gallery/${data.id}`);
             fetchGallery();

@@ -3,18 +3,12 @@ const router = express.Router();
 const db = require('../config/db');
 const {body, validationResult} = require('express-validator');
 const verifyToken = require('../middleware/verifyToken');
+const validate = require('../middleware/validate');
 
 const validateAll = [
     body('title').notEmpty().withMessage('Judul tidak boleh kosong').isLength({min: 3, max: 30}).withMessage('Panjang judul harus di antara 3 hingga 30 karakter'),
     body('description').notEmpty().withMessage('Deskripsi tidak boleh kosong').isLength({min: 30, max: 300}).withMessage('Panjang deskripsi harus di antara 30 hingga 300 karakter')
 ];
-
-const validate = (req, res, next) => {
-    if (!validationResult(req).isEmpty()) {
-        return res.status(400).json({message: validationResult(req).array()[0].msg});
-    }
-    next();
-};
 
 router.get('/', async (req, res) => {
     try {

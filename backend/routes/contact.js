@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('../config/db');
 const {body, validationResult} = require('express-validator');
 const verifyToken = require('../middleware/verifyToken');
+const validate = require('../middleware/validate');
 
 const validateAll = [
     body('address').notEmpty().withMessage('Alamat tidak boleh kosong').isLength({min: 10, max: 255}).withMessage('Panjang alamat harus di antara 10 hingga 255 karakter'),
@@ -14,13 +15,6 @@ const validateAll = [
     body('latitude').notEmpty().withMessage('Latitude tidak boleh kosong').isFloat().withMessage('Latitude harus berupa angka'),
     body('longitude').notEmpty().withMessage('Longitude tidak boleh kosong').isFloat().withMessage('Longitude harus berupa angka')
 ];
-
-const validate = (req, res, next) => {
-    if (!validationResult(req).isEmpty()) {
-        return res.status(400).json({message: validationResult(req).array()[0].msg});
-    }
-    next();
-};
 
 router.get('/', async (req, res) => {
     try {

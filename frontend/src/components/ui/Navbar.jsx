@@ -9,7 +9,7 @@ export default function Navbar() {
 
     return (
         <div>
-            <div className='fixed w-full px-20 py-6 hidden md:flex justify-between text-xl font-medium z-99 bg-light-1'>
+            <div className='fixed w-full px-20 py-6 hidden md:flex justify-between text-xl font-medium z-99 bg-light-1 border-b border-dark-1/25 shadow-md'>
                 <p>Solusi Digital Nusantara</p>
                 <div className='flex gap-8'>
                     <NavLink to={'/'}>Beranda</NavLink>

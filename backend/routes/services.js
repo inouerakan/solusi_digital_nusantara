@@ -4,6 +4,7 @@ const db = require('../config/db');
 const {body, validationResult} = require('express-validator');
 const verifyToken = require('../middleware/verifyToken');
 const deleteFile = require('../utils/deleteFile');
+const validate = require('../middleware/validate');
 
 const validateAll = [
     body('name').notEmpty().withMessage('Nama tidak boleh kosong').isLength({min: 10, max: 100}).withMessage('Panjang nama harus di antara 10 hingga 100 karakter'),
@@ -11,13 +12,6 @@ const validateAll = [
     body('content').notEmpty().withMessage('Konten tidak boleh kosong'),
     body('image_url').notEmpty().withMessage('Path tidak boleh kosong').isLength({min: 3, max: 255}).withMessage('Panjang path harus di antara 3 hingga 255 karakter')
 ];
-
-const validate = (req, res, next) => {
-    if (!validationResult(req).isEmpty()) {
-        return res.status(400).json({message: validationResult(req).array()[0].msg});
-    }
-    next();
-};
 
 router.get('/', async (req, res) => {
     try {

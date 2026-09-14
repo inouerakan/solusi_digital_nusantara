@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Loading from '../components/ui/Loading';
+import MessagesForm from '../components/Kontak/MessagesForm';
 
 export default function Contact() {
     const [contact, setContact] = useState([]);
@@ -28,31 +29,34 @@ export default function Contact() {
             </div>
             <div className='w-full px-6 md:px-20 py-16 md:py-30 flex flex-col gap-8 md:gap-16'>
                 <h2 className='text-xl text-center md:text-left md:text-4xl'>Hubungi Kami</h2>
-                <div className='grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-4 md:gap-y-16 text-base md:text-xl'>
-                    <div className='flex flex-col gap-2 md:gap-4'>
-                        <p>Alamat</p>
-                        <p className='text-dark-3'>{contact.address}</p>
+                <div className='flex'>
+                    <div className='flex-1 grid grid-cols-2 gap-8 text-base md:text-lg'>
+                        <div className='flex flex-col gap-2'>
+                            <p>Alamat</p>
+                            <p className='text-dark-3'>{contact.address}</p>
+                        </div>
+                        <div className='flex flex-col gap-2'>
+                            <p>Nomor Telepon</p>
+                            <p className='text-dark-3'>{contact.phone_number}</p>
+                        </div>
+                        <div className='flex flex-col gap-2'>
+                            <p>Email</p>
+                            <p className='text-dark-3'>{contact.email}</p>
+                        </div>
+                        <div className='flex flex-col gap-2'>
+                            <p>Instagram</p>
+                            <p className='text-dark-3'>{contact.instagram}</p>
+                        </div>
+                        <div className='flex flex-col gap-2'>
+                            <p>Youtube</p>
+                            <p className='text-dark-3'>{contact.youtube}</p>
+                        </div>
+                        <div className='flex flex-col gap-2'>
+                            <p>TikTok</p>
+                            <p className='text-dark-3'>{contact.tiktok}</p>
+                        </div>
                     </div>
-                    <div className='flex flex-col md:items-center gap-2 md:gap-4'>
-                        <p>Nomor Telepon</p>
-                        <p className='text-dark-3'>{contact.phone_number}</p>
-                    </div>
-                    <div className='flex flex-col md:items-end gap-2 md:gap-4'>
-                        <p>Email</p>
-                        <p className='text-dark-3'>{contact.email}</p>
-                    </div>
-                    <div className='flex flex-col gap-2 md:gap-4'>
-                        <p>Instagram</p>
-                        <p className='text-dark-3'>{contact.instagram}</p>
-                    </div>
-                    <div className='flex flex-col md:items-center gap-2 md:gap-4'>
-                        <p>Youtube</p>
-                        <p className='text-dark-3'>{contact.youtube}</p>
-                    </div>
-                    <div className='flex flex-col md:items-end gap-2 md:gap-4'>
-                        <p>TikTok</p>
-                        <p className='text-dark-3'>{contact.tiktok}</p>
-                    </div>
+                    <MessagesForm />
                 </div>
                 <iframe  
                     className='aspect-video w-full' 
