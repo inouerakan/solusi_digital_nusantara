@@ -179,7 +179,7 @@ Buka dua terminal terpisah.
 **Terminal 1 — Backend:**
 ```bash
 cd backend
-node index.js
+npm start
 ```
 Backend akan berjalan di `http://localhost:3000`.
 
